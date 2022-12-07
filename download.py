@@ -3,6 +3,7 @@ import folium
 import geopandas as gpd
 from sentinelsat.sentinel import SentinelAPI
 from pathlib import Path
+from unzip import unzip
 
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
@@ -18,9 +19,7 @@ for i in boundary['geometry']:
     footprint = i
 
 user = os.getenv('USER')
-print(user)
 password = os.getenv('PASSWORD')
-print(password)
 
 api = SentinelAPI(user, password, 'https://scihub.copernicus.eu/dhus')
 
@@ -31,3 +30,5 @@ gdf_sorted = gdf.sort_values(['cloudcoverpercentage'], ascending = [True])
 gdf_sorted = gdf_sorted.head(1)
 
 api.download_all(gdf_sorted.index)
+
+unzip()

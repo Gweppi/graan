@@ -1,4 +1,4 @@
-<h1>Grip Op Gras</h1>
+Grip Op Gras
 
 In order to use, install the following Python libraries:
 - folium
