@@ -7,3 +7,4 @@ In order to use, install the following Python libraries:
 - rasterio
 - python-dotenv
 - matplotlib
+- earthpy
