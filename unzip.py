@@ -5,7 +5,6 @@ from search import searchImages
 
 def unzip():
     files = os.listdir('./')
-    print(files)
 
     zippedfile = ''
 
