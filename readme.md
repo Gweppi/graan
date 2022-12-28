@@ -8,3 +8,4 @@ In order to use, install the following Python libraries:
 - python-dotenv
 - matplotlib
 - earthpy
+- gdal
