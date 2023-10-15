@@ -10,7 +10,7 @@ load_dotenv(find_dotenv())
 
 m = folium.Map([5.644035710624621, 52.53289344790048], zoom_start=11)
 path = Path(__file__).with_name('map.geojson')
-print(path)
+
 boundary = gpd.read_file(path)
 folium.GeoJson(boundary).add_to(m)
 
