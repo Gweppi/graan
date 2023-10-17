@@ -1,4 +1,3 @@
+.venv
+output
 .env
-env
-S2*
-node_modules
