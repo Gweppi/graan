@@ -1,4 +1,4 @@
-"""graan"""
+"""evi"""
 import openeo
 
 connection = openeo.connect("openeo.dataspace.copernicus.eu")
@@ -12,21 +12,18 @@ datacube = connection.load_collection(
                   "north": 52.543503102976246
                   },
   temporal_extent=["2023-09-09", "2023-09-09"],
-  bands=["B08", "B04"]
+  bands=["B02", "B04", "B08"]
 )
 
 datacube = datacube.median_time()
 
-datacube = datacube.process(
-  process_id="ndvi",
-  arguments={
-    "data": datacube,
-    "red": "B04",
-    "nir": "B08"
-  }
-)
+B02 = datacube.band('B02')
+B04 = datacube.band('B04')
+B08 = datacube.band('B08')
 
-result = datacube.save_result(format="GTiff")
+evi_cube = (2.5 * (B08 - B04)) / ((B08 + 6.0 * B04 - 7.5 * B02) + 1.0)
+
+result = evi_cube.save_result(format="GTiff")
 
 job = result.create_job()
 
