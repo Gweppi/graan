@@ -1,3 +1,5 @@
 .venv
 output
 .env
+wget-log
+wget-log.*
