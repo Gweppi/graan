@@ -27,16 +27,16 @@ with urllib.request.urlopen(f'https://www.daggegevens.knmi.nl/klimatologie/dagge
   f.close()
 
 # Filter dates
-dates = []
-sat_url = f'https://catalogue.dataspace.copernicus.eu/resto/api/collections/Sentinel2/search.json?cloudCover=[0,30]&startDate={start_date}&completionDate={end_date}&sortParam=startDate&geometry=POLYGON ((5.554850262125484 52.53996513567034, 5.555136972613241 52.5355639065524, 5.559451282798307 52.535622038868866, 5.559314753995039 52.54002326215965, 5.554850262125484 52.53996513567034))'.replace(' ', '%20')
-with urllib.request.urlopen(sat_url) as f:
-    sat_data = json.load(f)
+dates = ['2022-11-16T10:53:21.024Z', '2022-11-23T10:43:51.024Z', '2022-12-01T10:53:19.024Z', '2022-12-06T10:54:31.024Z', '2022-12-13T10:44:41.024Z', '2022-12-16T10:54:41.024Z', '2022-12-21T10:53:49.024Z', '2022-12-26T10:54:51.024Z', '2023-01-17T10:42:59.025Z', '2023-01-30T10:52:09.024Z', '2023-02-06T10:41:29.024Z', '2023-02-14T10:51:41.024Z', '2023-02-26T10:39:19.025Z', '2023-03-01T10:48:59.025Z', '2023-03-03T10:39:31.024Z', '2023-03-13T10:38:21.024Z', '2023-03-23T10:37:11.024Z', '2023-04-02T10:36:21.024Z', '2023-04-05T10:50:31.024Z', '2023-04-30T10:46:19.024Z', '2023-05-20T10:46:29.024Z', '2023-05-22T10:36:31.024Z', '2023-05-27T10:36:29.024Z', '2023-06-04T10:46:21.024Z', '2023-06-06T10:36:29.024Z', '2023-06-09T10:46:29.024Z', '2023-06-11T10:36:31.024Z', '2023-06-14T10:50:31.024Z', '2023-06-16T10:36:29.025Z', '2023-06-21T10:36:31.024Z', '2023-06-24T10:46:21.024Z']
+# sat_url = f'https://catalogue.dataspace.copernicus.eu/resto/api/collections/Sentinel2/search.json?cloudCover=[0,30]&startDate={start_date}&completionDate={end_date}&sortParam=startDate&geometry=POLYGON ((5.554850262125484 52.53996513567034, 5.555136972613241 52.5355639065524, 5.559451282798307 52.535622038868866, 5.559314753995039 52.54002326215965, 5.554850262125484 52.53996513567034))'.replace(' ', '%20')
+# with urllib.request.urlopen(sat_url) as f:
+#     sat_data = json.load(f)
 
-    for feature in sat_data['features']:
-        if feature['properties']['startDate'] not in dates:
-            dates.append(feature['properties']['startDate'])
+#     for feature in sat_data['features']:
+#         if feature['properties']['startDate'] not in dates:
+#             dates.append(feature['properties']['startDate'])
 
-    f.close()
+#     f.close()
 
 # Connect to openeo
 connection = openeo.connect("openeo.dataspace.copernicus.eu")
@@ -85,7 +85,7 @@ for date in dates:
        date=date,
        aoi=aoi
     )
-
+ 
     result = evi.save_result(format="GTiff")
 
     job = result.create_job()
